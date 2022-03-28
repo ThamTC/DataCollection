@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <%- include("./pages/partials/header") %>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <%- include("./pages/partials/sidenav_menu") %>
+                        <%- include("./pages/partials/footer") %>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <%- include("./pages/partials/meter_table", {meters: meters}) %>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                var socket = io("http://192.168.1.109:8000")
+                socket.on('meter', function(data) {
+                    let html =
+                        '<tr>' +
+                        '<td>' + data.name + '</td>' +
+                        '<td>' + data.vol + '</td>' +
+                        '<td>' + data.amp + '</td>' +
+                        '<td>' + data.power + '</td>' +
+                        '<td>' + data.cosphi + '</td>' +
+                        '</tr>'
+                    $('#meter-info').append(html)
+                })
+            })
+        </script>
+</body>
+
+</html>

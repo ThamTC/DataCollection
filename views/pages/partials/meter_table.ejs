@@ -1,0 +1,74 @@
+<main>
+    <div class="container-fluid px-4"></div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i> DataTable Example
+        </div>
+
+        <div class="card-body">
+            <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                <div class="dataTable-top">
+                    <!-- <div class="dataTable-dropdown">
+                        <label>
+                            <select class="dataTable-selector">
+                                <option value="5">5</option>
+                                <option value="10" selected="">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                            </select>
+                        entries per page
+                        </label>
+                    </div>
+                    <div class="dataTable-search">
+                        <input class="dataTable-input" placeholder="Search..." type="text">
+                    </div> -->
+                </div>
+
+                <table table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Meter Name</th>
+                            <th>Vol (V)</th>
+                            <th>Amp (A)</th>
+                            <th>Power (Kw)</th>
+                            <th>cosphi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="meter-info">
+
+                        <% JSON.parse(meters).forEach((meter) => { %>
+                            <tr>
+                                <td>
+                                    <%= meter.name %>
+                                </td>
+                                <td>
+                                    <%= meter.vol %>
+                                </td>
+                                <td>
+                                    <%= meter.amp %>
+                                </td>
+                                <td>
+                                    <%= meter.power %>
+                                </td>
+                                <td>
+                                    <%= meter.cosphi %>
+                                </td>
+                            </tr>
+                            <% }) %>
+
+                    </tbody>
+                </table>
+                <!-- <TableBottom/> -->
+                <!-- <div class="input-group mb-3 ">
+              <span class="input-group-text" id="basic-addon3">Change Time Request to DB</span>
+              <input type="number" class="form-control input-change" placeholder="input > 0" v-model="changeTime">
+              <button class="btn btn-outline-secondary" type="button" @click="change" >Change</button>
+              <span class="text-counter">{{ counter }}s</span>
+            </div> -->
+
+            </div>
+        </div>
+    </div>
+</main>
