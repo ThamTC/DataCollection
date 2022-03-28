@@ -28,35 +28,39 @@
                 <table table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Meter Name</th>
-                            <th>Vol (V)</th>
-                            <th>Amp (A)</th>
-                            <th>Power (Kw)</th>
-                            <th>cosphi</th>
+                            <th>Hệ thống</th>
+                            <th>Nội dung cảnh báo</th>
+                            <th>Kiểu ALARM</th>
+                            <th>Status</th>
+                            <th>SĐT/INFO Xử lý cảnh báo</th>
+                            <th>Thời gian ALARM</th>
                         </tr>
                     </thead>
 
                     <tbody id="meter-info">
-
-                        <% JSON.parse(meters).forEach((meter) => { %>
+                        <% JSON.parse(data).forEach((data) => { %>
                             <tr>
                                 <td>
-                                    <%= meter.name %>
+                                    <%= data.name %>
                                 </td>
                                 <td>
-                                    <%= meter.vol %>
+                                    <%= data.content %>
                                 </td>
                                 <td>
-                                    <%= meter.amp %>
+                                    <%= data.style %>
                                 </td>
                                 <td>
-                                    <%= meter.power %>
+                                    <%= data.status %>
                                 </td>
                                 <td>
-                                    <%= meter.cosphi %>
+                                    <%= data.contact %>
+                                </td>
+                                <td>
+                                    <%= data.time %>
                                 </td>
                             </tr>
                             <% }) %>
+
 
                     </tbody>
                 </table>

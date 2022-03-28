@@ -1,10 +1,11 @@
-POST http://192.168.1.109:8000/api/send_meter HTTP/1.1
+POST http://192.168.1.109:8000/api/alarm HTTP/1.1
 content-type: application/json
 
 {
     "name": "Meter",
-    "vol": "220",
-    "amp": "12",
-    "power": "2200",
-    "cosphi": "1"
+    "content": "220",
+    "style": "12",
+    "status": "2200",
+    "contact": "1",
+    "time":""
 }

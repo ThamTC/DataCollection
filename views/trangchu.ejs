@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>IFC</title>
     <script src="js/jquery.js"></script>
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -22,20 +22,21 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                <%- include("./pages/partials/meter_table", {meters: meters}) %>
+                <%- include("./pages/partials/meter_table", {data: data}) %>
             </div>
         </div>
         <script>
             $(document).ready(function() {
                 var socket = io("http://192.168.1.109:8000")
-                socket.on('meter', function(data) {
+                socket.on('alarm_data', function(data) {
                     let html =
                         '<tr>' +
                         '<td>' + data.name + '</td>' +
-                        '<td>' + data.vol + '</td>' +
-                        '<td>' + data.amp + '</td>' +
-                        '<td>' + data.power + '</td>' +
-                        '<td>' + data.cosphi + '</td>' +
+                        '<td>' + data.content + '</td>' +
+                        '<td>' + data.style + '</td>' +
+                        '<td>' + data.status + '</td>' +
+                        '<td>' + data.contact + '</td>' +
+                        '<td>' + data.time + '</td>' +
                         '</tr>'
                     $('#meter-info').append(html)
                 })
