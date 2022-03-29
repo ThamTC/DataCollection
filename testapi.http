@@ -1,4 +1,6 @@
-POST http://192.168.1.109:8000/api/alarm HTTP/1.1
+
+//POST http://192.168.1.109:8000/api/alarm HTTP/1.1
+POST http://113.160.233.28:8000/api/alarm HTTP/1.1
 content-type: application/json
 
 {
@@ -6,6 +8,6 @@ content-type: application/json
     "content": "220",
     "style": "12",
     "status": "2200",
-    "contact": "1",
-    "time":""
+    "contact": "0905123456",
+    "time":"2022-03-28"
 }

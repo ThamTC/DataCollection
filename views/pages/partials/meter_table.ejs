@@ -25,7 +25,7 @@
                     </div> -->
                 </div>
 
-                <table table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table table class="table table-striped table-dark table-hover table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Hệ thống</th>
@@ -38,7 +38,7 @@
                     </thead>
 
                     <tbody id="meter-info">
-                        <% JSON.parse(data).forEach((data) => { %>
+                        <% data.forEach((data) => { %>
                             <tr>
                                 <td>
                                     <%= data.name %>

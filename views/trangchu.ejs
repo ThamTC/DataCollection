@@ -27,7 +27,7 @@
         </div>
         <script>
             $(document).ready(function() {
-                var socket = io("http://192.168.1.109:8000")
+                var socket = io("http://113.160.233.28:8000")
                 socket.on('alarm_data', function(data) {
                     let html =
                         '<tr>' +
@@ -38,7 +38,14 @@
                         '<td>' + data.contact + '</td>' +
                         '<td>' + data.time + '</td>' +
                         '</tr>'
-                    $('#meter-info').append(html)
+                    $('#meter-info').prepend(html)
+                        // global.redis_client.set("alarm_data", [{
+                        //     "name": "name"
+                        // }])
+                        // global.redis_client.get("alarm_data", (err, data) => {
+                        //     console.log(data)
+                        // })
+
                 })
             })
         </script>

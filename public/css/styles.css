@@ -1994,6 +1994,7 @@ progress {
 
 .table-responsive,
 .dataTable-wrapper .dataTable-container {
+    max-height: 100px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }

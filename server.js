@@ -1,4 +1,5 @@
 require('dotenv').config()
+
 const express = require("express")
 const bodyParser = require('body-parser')
 const app = express()
@@ -14,10 +15,12 @@ const db = require("./config/connectDB")
 db.connectDB()
 
 const server = require("http").Server(app)
+
 global.io = require("socket.io")(server)
 const meterSendData = require("./routers/meterSendData")
 app.use(web_router)
 app.use("/api", meterSendData)
+app.use("/warning", api_router)
 
 server.listen(process.env.PORT || 3000)
 
