@@ -1,6 +1,7 @@
 <%- include("./pages/partials/meter_table", {data: data}) %>
     <script>
         $(document).ready(function() {
+            // console.log($(location))
             const socketHost = $(location).attr('host')
             var socket = io(socketHost)
             socket.on('alarm_data', function(data) {

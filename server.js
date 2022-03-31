@@ -9,24 +9,29 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(expressLayout)
 app.set("layout", "./layouts/full-width")
-app.use(express.static("public"))
+    // app.set("user_layout", "./layouts/user-layout")
+app.use(express.static(__dirname + '/public'))
 app.set("view engine", "ejs")
 app.set("views", "./views")
 const web_router = require("./routers/web_router")
 const api_router = require("./routers/api_router")
 const redis_api = require("./routers/redis_api")
+const userRouter = require("./routers/user_router")
+const authApi = require("./routers/auth.router")
 const db = require("./config/connectDB")
 
 db.connectDB()
 
 const server = require("http").Server(app)
 
-global.io = require("socket.io")(server)
+global.io = require('socket.io')(server)
 const meterSendData = require("./routers/meterSendData")
 app.use(web_router)
 app.use("/api", meterSendData)
 app.use("/warning", api_router)
 app.use("/api/redis", redis_api)
+app.use("/user", userRouter)
+app.use("/api/auth", authApi)
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
