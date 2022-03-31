@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./head.ejs") %>
+
+    <body class="sb-nav-fixed">
+        <%- include("../pages/partials/header") %>
+            <div id="layoutSidenav">
+                <div id="layoutSidenav_nav">
+                    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                        <%- include("../pages/partials/sidenav_menu") %>
+                            <%- include("../pages/partials/sidenav_footer") %>
+                    </nav>
+                </div>
+                <div id="layoutSidenav_content">
+                    <%- body %>
+                        <%- include("./footer") %>
+                </div>
+            </div>
+
+    </body>
+
+</html>

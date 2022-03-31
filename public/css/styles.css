@@ -11354,7 +11354,7 @@ body {
 }
 
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
-    width: 225px;
+    width: 160px;
     height: 100vh;
     z-index: 1038;
 }
@@ -11368,7 +11368,7 @@ body {
 }
 
 .sb-nav-fixed #layoutSidenav #layoutSidenav_content {
-    padding-left: 225px;
+    padding-left: 160px;
     top: 56px;
 }
 
@@ -11403,7 +11403,7 @@ body {
 }
 
 .sb-topnav .navbar-brand {
-    width: 225px;
+    width: 160px;
     margin: 0;
 }
 

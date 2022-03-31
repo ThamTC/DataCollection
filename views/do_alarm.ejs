@@ -1,0 +1,64 @@
+<%- include("./pages/partials/doalarm_table") %>
+    <script>
+        var checkboxElems
+        var removeElems
+        $(document).ready(function() {
+            const socketHost = $(location).attr('host')
+            var socket = io(socketHost)
+
+            $.get("/api/redis/index", (data, status) => {
+                updateDataTable(data)
+                tableActions()
+            })
+            socket.on('do-alarm', function(data) {
+                updateDataTable(data)
+                tableActions()
+            })
+
+        })
+
+        function tableActions() {
+            checkboxElems = document.querySelectorAll("input[type='checkbox']");
+            for (var i = 0; i < checkboxElems.length; i++) {
+                checkboxElems[i].addEventListener("click", updateCheckToRedis);
+            }
+            removeElems = document.querySelectorAll("i");
+            for (var i = 0; i < removeElems.length; i++) {
+                removeElems[i].addEventListener("click", removeTaskRedis);
+            }
+        }
+
+        function removeTaskRedis(e) {
+            console.log(e.target.id)
+            $.post("api/redis/delete", {
+                id: e.target.id,
+            })
+        }
+
+        function updateCheckToRedis(e) {
+            console.log(e.target.value)
+            $.post("api/redis/update", {
+                id: e.target.value,
+                isAction: e.target.checked ? "checked" : "",
+                username: e.target.checked ? "Đang thực hiện" : ""
+            })
+        }
+
+        function updateDataTable(dataTables) {
+            $('#alarm-items').html("")
+            Object.keys(dataTables).forEach((key) => {
+                if (dataTables[key] != null) {
+                    let html =
+                        '<tr>' +
+                        '<td>' + dataTables[key].name + '</td>' +
+                        '<td>' + dataTables[key].content + '</td>' +
+                        '<td>' + dataTables[key].count + '</td>' +
+                        '<td><input name="chkbox" value=' + key + ' class="form-check-input" type="checkbox"' + dataTables[key].isAction + '></td>' +
+                        '<td>' + dataTables[key].username + '</td>' +
+                        '<td><i class="fas fa-trash" id=' + key + '></i></td>' +
+                        '</tr>'
+                    $('#alarm-items').append(html)
+                }
+            })
+        }
+    </script>

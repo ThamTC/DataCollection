@@ -39,27 +39,29 @@
 
                     <tbody id="meter-info">
                         <% data.forEach((data) => { %>
-                            <tr>
-                                <td>
-                                    <%= data.name %>
-                                </td>
-                                <td>
-                                    <%= data.content %>
-                                </td>
-                                <td>
-                                    <%= data.style %>
-                                </td>
-                                <td>
-                                    <%= data.status %>
-                                </td>
-                                <td>
-                                    <%= data.contact %>
-                                </td>
-                                <td>
-                                    <%= data.time %>
-                                </td>
-                            </tr>
-                            <% }) %>
+                            <% if (data != null) { %>
+                                <tr>
+                                    <td>
+                                        <%= data.name %>
+                                    </td>
+                                    <td>
+                                        <%= data.content %>
+                                    </td>
+                                    <td>
+                                        <%= data.style %>
+                                    </td>
+                                    <td>
+                                        <%= data.status %>
+                                    </td>
+                                    <td>
+                                        <%= data.contact %>
+                                    </td>
+                                    <td>
+                                        <%= data.time %>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                    <% }) %>
 
 
                     </tbody>

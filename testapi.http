@@ -4,10 +4,10 @@ POST http://113.160.233.28:8000/api/alarm HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Meter",
-    "content": "220",
-    "style": "12",
-    "status": "2200",
+    "name": "admin",
+    "content": "Hung Yen 21PC, Mat du lieu do xa. Vui long kiem tra!: 1",
+    "style": "CALL, SMS",
+    "status": "DONE",
     "contact": "0905123456",
     "time":"2022-03-28"
 }

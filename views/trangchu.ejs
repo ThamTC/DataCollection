@@ -1,54 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IFC</title>
-    <script src="js/jquery.js"></script>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-    <script src="/socket.io/socket.io.js"></script>
-</head>
-
-<body class="sb-nav-fixed">
-    <%- include("./pages/partials/header") %>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <%- include("./pages/partials/sidenav_menu") %>
-                        <%- include("./pages/partials/footer") %>
-                </nav>
-            </div>
-            <div id="layoutSidenav_content">
-                <%- include("./pages/partials/meter_table", {data: data}) %>
-            </div>
-        </div>
-        <script>
-            $(document).ready(function() {
-                var socket = io("http://113.160.233.28:8000")
-                socket.on('alarm_data', function(data) {
-                    let html =
-                        '<tr>' +
-                        '<td>' + data.name + '</td>' +
-                        '<td>' + data.content + '</td>' +
-                        '<td>' + data.style + '</td>' +
-                        '<td>' + data.status + '</td>' +
-                        '<td>' + data.contact + '</td>' +
-                        '<td>' + data.time + '</td>' +
-                        '</tr>'
-                    $('#meter-info').prepend(html)
-                        // global.redis_client.set("alarm_data", [{
-                        //     "name": "name"
-                        // }])
-                        // global.redis_client.get("alarm_data", (err, data) => {
-                        //     console.log(data)
-                        // })
-
-                })
+<%- include("./pages/partials/meter_table", {data: data}) %>
+    <script>
+        $(document).ready(function() {
+            const socketHost = $(location).attr('host')
+            var socket = io(socketHost)
+            socket.on('alarm_data', function(data) {
+                let html =
+                    '<tr>' +
+                    '<td>' + data.name + '</td>' +
+                    '<td>' + data.content + '</td>' +
+                    '<td>' + data.style + '</td>' +
+                    '<td>' + data.status + '</td>' +
+                    '<td>' + data.contact + '</td>' +
+                    '<td>' + data.time + '</td>' +
+                    '</tr>'
+                $('#meter-info').prepend(html)
             })
-        </script>
-</body>
-
-</html>
+        })
+    </script>

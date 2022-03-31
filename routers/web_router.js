@@ -9,16 +9,19 @@ web_router.get("/alarm", function(req, res) {
         resData = JSON.parse(data)
         if (err) {
             throw err
-        } else if (data == null) {
+        } else if (data != null) {
             res.render("trangchu", {
-                data: []
+                data: resData
             })
         } else {
             res.render("trangchu", {
-                data: resData
+                data: []
             })
         }
 
     })
+})
+web_router.get("/do-alarm", function(req, res) {
+    res.render("do_alarm.ejs")
 })
 module.exports = web_router
