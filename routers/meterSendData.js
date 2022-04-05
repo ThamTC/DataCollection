@@ -8,8 +8,24 @@ redis_client.on("error", function(error) {
 });
 
 router.post('/alarm', async(req, res) => {
+    console.log(req.body)
+    var dataRedis = {}
+    var contact = req.body.contact.split(',')
 
-    global.io.sockets.emit('alarm_data', req.body);
+    if (contact.length > 1) {
+        dataRedis.contact = contact[0] + ",..."
+    } else {
+        dataRedis.contact = contact[0]
+    }
+    console.log(dataRedis.contact)
+    dataRedis.name = req.body.name
+    dataRedis.content = req.body.content
+    dataRedis.style = req.body.style
+    dataRedis.status = req.body.status
+    dataRedis.time = req.body.time
+    dataRedis.contactAppend = req.body.contact
+
+    global.io.sockets.emit('alarm_data', dataRedis);
 
     redis_client.get("warning", (err, data) => {
         var warData = []
@@ -18,7 +34,7 @@ router.post('/alarm', async(req, res) => {
         } else if (data != null) {
             warData = JSON.parse(data)
         }
-        warData.unshift(req.body)
+        warData.unshift(dataRedis)
             // console.log(warData)
         redis_client.set("warning", JSON.stringify(warData))
     })
@@ -68,7 +84,7 @@ router.post('/alarm', async(req, res) => {
         global.io.sockets.emit("do-alarm", resData)
     })
 
-    return res.status(200).json({ "data": req.body });
+    return res.status(200).json({ "status": "success" });
 
 });
 

@@ -1,10 +1,23 @@
 require('dotenv').config()
 
 const express = require("express")
+const cookieParser = require('cookie-parser')
+const cors = require("cors")
 const expressLayout = require("express-ejs-layouts")
 const bodyParser = require('body-parser')
+const rateLimit = require('express-rate-limit')
 
 const app = express()
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000, // 15 minutes
+    max: 200, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
+app.use(limiter)
+app.use(cookieParser())
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(expressLayout)
@@ -52,7 +65,9 @@ server.listen(process.env.PORT || 3000)
 
 global.io.on("connection", function(socket) {
     console.log("Co nguoi ket noi " + socket.id)
-    socket.on("send_meter", function() {})
+    socket.on("disconnect", function(client) {
+        console.log(socket.id + " da ngat ket noi")
+    })
 })
 
 // app.get("/", function(req, res) {

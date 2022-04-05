@@ -39,7 +39,7 @@ router.post("/update", (req, res) => {
             redis_client.set("do-alarm", JSON.stringify(resData))
         }
         global.io.sockets.emit("do-alarm", resData)
-        return res.status(200)
+        return res.status(200).send("success")
     })
 })
 
@@ -60,7 +60,7 @@ router.post("/delete", (req, res) => {
             redis_client.set("do-alarm", JSON.stringify(resData))
         }
         global.io.sockets.emit("do-alarm", resData)
-        return res.status(200)
+        return res.status(200).send("success")
     })
 })
 

@@ -11,11 +11,11 @@
                             <div class="card-body">
                                 <form id="myForm" action="" method="post">
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                        <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" required/>
                                         <label for="inputEmail">Email address</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                        <input class="form-control" id="inputPassword" type="password" placeholder="Password" required/>
                                         <label for="inputPassword">Password</label>
                                     </div>
                                     <div class="form-check mb-3">
@@ -46,11 +46,17 @@
         $("#myForm").on("submit", (e) => {
             e.preventDefault()
             $.post("/api/auth/login", {
-                    "username": "thamtc",
-                    "password": "123456"
+                    "email": $("#inputEmail").val(),
+                    "password": $("#inputPassword").val(),
+                    "remember": $("#inputRememberPassword").is(":checked")
                 },
                 (data, status) => {
-                    console.log(data)
+                    if (data.error == true) {
+                        alert(data.content)
+                    } else {
+                        localStorage.setItem("accessToken", "Bearer " + data.content)
+                        window.location.href = '/'
+                    }
                 })
         })
     })
