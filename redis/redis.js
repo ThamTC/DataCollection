@@ -13,6 +13,10 @@ const redisToken = {
         resData = await JSON.parse(redis_client.get(key))
         return resData
     },
+    clearData: (key) => {
+        const resData = []
+        redis_client.set(key, JSON.stringify(resData))
+    },
     updateData: async(key, value, newValue) => {
         const resData = []
         resData = await JSON.parse(redis_client.get(key))
@@ -53,6 +57,17 @@ const redisToken = {
             return false
         }
         return true
+    },
+    clearCacheInterval: () => {
+        setInterval(() => {
+            const d = new Date()
+            let isRemoved = true
+            if (d.getHours() == process.env.REDIS_TIME_CLEAR && d.getMinutes() == 0 && isRemoved) {
+                redisToken.clearData("warning")
+                redisToken.clearData("do-alarm")
+                isRemoved = false
+            }
+        }, 1000 * 60 * 60 * 24);
     }
 }
 

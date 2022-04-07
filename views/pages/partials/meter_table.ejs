@@ -42,22 +42,22 @@
                                 <% if (data != null) { %>
                                     <tr>
                                         <td>
-                                            <%= data.name %>
+                                            <%= data.name || "" %>
                                         </td>
                                         <td>
-                                            <%= data.content %>
+                                            <%= data.content || "" %>
                                         </td>
                                         <td>
-                                            <%= data.style %>
+                                            <%= data.style || "" %>
                                         </td>
                                         <td>
-                                            <%= data.status %>
-                                        </td>
-                                        <td id="contact">
-                                            <%= data.contact %>
+                                            <%= data.status || "" %>
                                         </td>
                                         <td>
-                                            <%= data.time %>
+                                            <%= data.contact || "" %>
+                                        </td>
+                                        <td>
+                                            <%= data.time || "" %>
                                         </td>
                                     </tr>
                                     <% } %>

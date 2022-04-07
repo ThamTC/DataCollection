@@ -2,7 +2,7 @@
     <script>
         var checkboxElems
         var removeElems
-        var username = "<%= user.name  %>";
+        var userAuth = "<%= user.name  %>";
         $(document).ready(function() {
             const socketHost = $(location).attr('host')
             var socket = io(socketHost)
@@ -30,15 +30,14 @@
         }
 
         function removeTaskRedis(e) {
-            // console.log(e.target.id)
-            let username = $("username").text()
-            if (!username || username === username) {
-                $.post("api/redis/delete", {
-                    id: e.target.id,
-                })
-            } else {
-                alert("Bạn không được phép thực hiện")
-            }
+            console.log(e.target.id)
+            let username = $("#username_" + e.target.id).text()
+            $.post("api/redis/delete", {
+                id: e.target.id,
+                userCheck: username,
+                userDone: userAuth
+            })
+
         }
 
         function updateCheckToRedis(e) {
@@ -46,7 +45,7 @@
             $.post("api/redis/update", {
                 id: e.target.value,
                 isAction: e.target.checked ? "checked" : "",
-                username: e.target.checked ? username : ""
+                username: e.target.checked ? userAuth : ""
             })
         }
 
@@ -55,7 +54,7 @@
             Object.keys(dataTables).forEach((key) => {
                 if (dataTables[key] != null) {
                     let isDisable = ''
-                    if (username !== dataTables[key].username) {
+                    if (userAuth !== dataTables[key].username) {
                         isDisable = 'disabled'
                     }
                     if (dataTables[key].username === "") {
@@ -67,7 +66,7 @@
                         '<td>' + dataTables[key].content + '</td>' +
                         '<td>' + dataTables[key].count + '</td>' +
                         '<td><input ' + isDisable + ' name="chkbox" value=' + key + ' class="form-check-input" type="checkbox"' + dataTables[key].isAction + '></td>' +
-                        '<td id="username">' + dataTables[key].username + '</td>' +
+                        '<td id="username_' + key + '">' + dataTables[key].username + '</td>' +
                         '<td><i class="fas fa-trash" id=' + key + '></i></td>' +
                         '</tr>'
                     $('#alarm-items').append(html)

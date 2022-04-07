@@ -4,7 +4,7 @@ POST http://113.160.233.28:8000/api/alarm HTTP/1.1
 content-type: application/json
 
 {
-    "name": "admin",
+    
     "content": "Hung Yen 21PC, Mat du lieu do xa. Vui long kiem tra!: 1",
     "style": "CALL, SMS",
     "status": "DONE",

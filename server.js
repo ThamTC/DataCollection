@@ -32,6 +32,7 @@ const redis_api = require("./routers/redis_api")
 const userRouter = require("./routers/user_router")
 const authApi = require("./routers/auth.router")
 const db = require("./config/connectDB")
+const redisClient = require("./redis/redis")
 
 db.connectDB()
 
@@ -60,6 +61,7 @@ app.use((error, req, res, next) => {
         },
     });
 });
+redisClient.clearCacheInterval()
 
 server.listen(process.env.PORT || 3000)
 
