@@ -22,6 +22,7 @@ router.get("/index", (req, res) => {
 })
 
 router.post("/update", (req, res) => {
+    console.log(req.body.isAction)
     var resData = []
     redis_client.get("do-alarm", (err, data) => {
         if (err) {

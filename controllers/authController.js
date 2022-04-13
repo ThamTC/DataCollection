@@ -32,7 +32,7 @@ const authController = {
             path: "/",
             sameSite: "strict"
         })
-        return res.send({ "error": false, "content": accesssToken })
+        return res.status(200).json({ id: user.id, name: user.name, accesssToken })
     },
     register: async(req, res) => {
         const name = req.body.name
@@ -60,7 +60,7 @@ const authController = {
         return res.status(200).send({ "error": false, "content": "Đăng ký thành công" });
 
     },
-    logout: async(req, res) => {
+    logout: (req, res) => {
         res.cookie("refreshToken", '', {
             httpOnly: true,
             secure: false,
@@ -68,7 +68,7 @@ const authController = {
             sameSite: "strict"
         })
         res.end()
-        return res.redirect("/user/login")
+            // return res.redirect("/user/login")
 
     },
     refreshToken: async(req, res) => {
